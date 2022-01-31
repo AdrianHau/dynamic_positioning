@@ -10,3 +10,5 @@ Python implementation example? - https://github.com/ivmech/ivPID
 https://en.wikipedia.org/wiki/PID_controller
 
 https://www.ni.com/en-no/innovations/white-papers/06/pid-theory-explained.html
+
+https://github.com/m-lundberg/simple-pid/blob/master/simple_pid/PID.py
