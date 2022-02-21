@@ -1,7 +1,7 @@
 # dynamic_positioning
 PID algorithm implementation for project in TMR4345 Marin Datalab
 
-Useful links:
+Potentially useful resources:
 
 PID Algorithm paper - http://pc-education.mcmaster.ca/Textbook%20WEB%20book%20with%20updates/Marlin-Ch08.pdf
 
