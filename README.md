@@ -9,6 +9,8 @@ Python implementation example? - https://github.com/ivmech/ivPID
 
 Design of a dynamic positioning system for a floating body - https://pure.tue.nl/ws/files/4404981/613690.pdf
 
+Dynamic positioning - Project in TMR4160 - Computer methods for marine applications at NTNU - https://github.com/jhlenes/DynamicPositioning
+
 https://en.wikipedia.org/wiki/PID_controller
 
 https://www.ni.com/en-no/innovations/white-papers/06/pid-theory-explained.html
