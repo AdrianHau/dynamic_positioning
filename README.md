@@ -22,5 +22,6 @@ Kok lol:
 
 - https://github.com/Eldarsa/MDL-Dynamic-Positioning
 
+- https://github.com/johanbso/TMR4245-Marine-Computer-Lab
 
 
