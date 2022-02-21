@@ -9,19 +9,20 @@ Python implementation example? - https://github.com/ivmech/ivPID
 
 Design of a dynamic positioning system for a floating body - https://pure.tue.nl/ws/files/4404981/613690.pdf
 
-Kok lol:
-https://github.com/jhlenes/DynamicPositioning
-
-https://github.com/jonasbjorlo/marin-datalab-DP
-
-https://github.com/jonasbjorlo/marin-datalab-DP
-
-https://github.com/Eldarsa/MDL-Dynamic-Positioning
-
-
-
 https://en.wikipedia.org/wiki/PID_controller
 
 https://www.ni.com/en-no/innovations/white-papers/06/pid-theory-explained.html
 
 https://github.com/m-lundberg/simple-pid/blob/master/simple_pid/PID.py
+
+Kok lol:
+- https://github.com/jhlenes/DynamicPositioning
+
+- https://github.com/jonasbjorlo/marin-datalab-DP
+
+- https://github.com/jonasbjorlo/marin-datalab-DP
+
+- https://github.com/Eldarsa/MDL-Dynamic-Positioning
+
+
+
