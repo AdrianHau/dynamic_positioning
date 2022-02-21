@@ -7,6 +7,8 @@ PID Algorithm paper - http://pc-education.mcmaster.ca/Textbook%20WEB%20book%20wi
 
 Python implementation example? - https://github.com/ivmech/ivPID
 
+Design of a dynamic positioning system for a floating body - https://pure.tue.nl/ws/files/4404981/613690.pdf
+
 https://en.wikipedia.org/wiki/PID_controller
 
 https://www.ni.com/en-no/innovations/white-papers/06/pid-theory-explained.html
