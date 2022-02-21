@@ -20,7 +20,7 @@ Kok lol:
 
 - https://github.com/jonasbjorlo/marin-datalab-DP
 
-- https://github.com/jonasbjorlo/marin-datalab-DP
+- https://github.com/eliassr/TMR4345-DP
 
 - https://github.com/Eldarsa/MDL-Dynamic-Positioning
 
