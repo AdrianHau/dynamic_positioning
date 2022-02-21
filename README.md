@@ -16,7 +16,7 @@ https://www.ni.com/en-no/innovations/white-papers/06/pid-theory-explained.html
 https://github.com/m-lundberg/simple-pid/blob/master/simple_pid/PID.py
 
 Kok lol:
-- https://github.com/jhlenes/DynamicPositioning
+- https://github.com/jhlenes/DynamicPositioning (anna fag) 
 
 - https://github.com/jonasbjorlo/marin-datalab-DP
 
