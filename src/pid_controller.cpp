@@ -4,18 +4,18 @@
 
 
 
-PID::PID(double Kp, double Ki, double Kd, double Setpoint) {
+PID::PID(double Kp, double Ki, double Kd, double setPoint) {
 
 	kp = Kp;
 	ki = Ki;
 	kd = Kd;
 
-	setpoint = Setpoint;
+	setpoint = setPoint;
 
 	i_term = 0;
-	
-	clock_t previous_time = 0;
-	double previous_error = 0;
+
+	previous_time = 0;
+	previous_error = 0;
 
 }
 
@@ -41,4 +41,3 @@ double PID::calculate_output(double current_position, double setpoint) {
 
 	return p_term + i_term + d_term;
 }
-
