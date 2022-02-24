@@ -146,10 +146,12 @@
     </ClCompile>
     <ClCompile Include="pid_controller.cpp" />
     <ClCompile Include="pid_testing.cpp" />
+    <ClCompile Include="resources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pid_controller.h" />
     <ClInclude Include="pid_testing.h" />
+    <ClInclude Include="resources.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

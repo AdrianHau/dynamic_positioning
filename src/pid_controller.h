@@ -10,8 +10,9 @@ class PID {
 
 	public:
 
-		PID(double Kp, double Ki, double Kd, double setPoint);
-		double calculate_output(double current_position, double setpoint);
+		PID(double Kp, double Ki, double Kd, double setPoint, double minOutput, double maxOutput);
+		double calculate_output(double current_position);
+		void clear_variables();
 
 	private:
 
@@ -21,11 +22,21 @@ class PID {
 
 		double setpoint;
 
+		double min_output;
+		double max_output;
+
+		double p_term;
 		double i_term;
+		double d_term;
 
+		clock_t current_time;
 		clock_t previous_time;
+		double dt;
+		
+		double current_error;
 		double previous_error;
+		double de;
 
-		double current_position;
+		double output;
 		
 };

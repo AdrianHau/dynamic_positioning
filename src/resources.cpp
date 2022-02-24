@@ -12,4 +12,5 @@ double set_setpoint(PhidgetVoltageRatioInputHandle position_channel) {
 	std::cout << "Reference position has been set to: " << setpoint << "\n";
 
 	return setpoint;
+
 }

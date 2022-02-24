@@ -7,5 +7,4 @@
 //void test_given_kp_and_constant_error_then_constant_output();
 //void test_given_kp_and_ki_and_constant_error_then_increasing_output();
 //void test_given_kp_and_kd_and_constant_error_then_constant_output();
-//void test_given_voltage_input_then_sensible_output();
 //void general_phidget_testing();

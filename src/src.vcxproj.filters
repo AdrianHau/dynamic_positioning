@@ -24,12 +24,18 @@
     <ClCompile Include="pid_testing.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="resources.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pid_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="pid_testing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
