@@ -39,7 +39,7 @@ double PID::calculate_output(double current_position) {
 	output = (p_term + i_term + d_term) * 100; // Skalering??????
 
 	if (output < min_output) { output = 0; }
-	if (output >= max_output) { output = 150; }
+	if (output >= max_output) { output = max_output; }
 
 	return output;
 }

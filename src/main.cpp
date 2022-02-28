@@ -12,7 +12,6 @@ int main() {
 	PhidgetVoltageRatioInputHandle position_channel;
 	PhidgetVoltageRatioInput_create(&position_channel);
 
-
 	Phidget_setChannel((PhidgetHandle)position_channel, 3);
 	Phidget_openWaitForAttachment((PhidgetHandle)position_channel, 5000);
 
