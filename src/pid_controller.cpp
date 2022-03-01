@@ -36,9 +36,9 @@ double PID::calculate_output(double current_position) {
 	i_term += ki * (previous_error + current_error) / 2 * dt; // Trapesmetoden foreløpig, teste andre? Har det mye å si?
 	d_term = kd * de / dt;
 
-	output = (p_term + i_term + d_term) * 100; // Skalering??????
+	output = (p_term + i_term + d_term); // Skalering??????
 
-	if (output < min_output) { output = 0; }
+	if (output < min_output) { output = min_output; }
 	if (output >= max_output) { output = max_output; }
 
 	return output;

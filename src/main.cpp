@@ -25,7 +25,7 @@ int main() {
 
 	// Determine setpoint and initialize PID controller instance
 	double setpoint = set_setpoint(position_channel);
-	PID pid(100, 0, 20, setpoint, 95, 150);
+	PID pid(5000, 1000, 20, setpoint, 120, 150);
 
 	std::cout << "Place boat in wanted starting position.\n";
 	system("pause");
@@ -35,7 +35,7 @@ int main() {
 	double current_position, output;
 
 	int counter = 0;
-	int max_iterations = 100;
+	int max_iterations = 200;
 	do {
 
 		// Get current position
