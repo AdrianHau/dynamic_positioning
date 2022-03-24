@@ -29,12 +29,13 @@ double PID::calculate_output(double current_position) {
 	current_time = clock();
 	dt = double(current_time - previous_time) / CLOCKS_PER_SEC;
 	previous_time = current_time;
-	// Return 0 and move to next iteration if dt abnormally large
-	if (dt > dt_max) { return 0; }
 
 	current_error = setpoint - current_position;
 	de = current_error - previous_error;
 	previous_error = current_error;
+
+	// Return 0 and move to next iteration if dt abnormally large
+	if (dt > dt_max) { return 0; }
 
 	p_term = kp * current_error;
 	i_term += ki * (previous_error + current_error) / 2 * dt; // Trapesmetoden foreløpig, teste andre? Har det mye å si?
