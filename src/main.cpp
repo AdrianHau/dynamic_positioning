@@ -24,35 +24,37 @@ int main() {
 
 
 	// Determine setpoint and initialize PID controller instance
-	double setpoint = set_setpoint(position_channel);
-	PID pid(5000, 1000, 20, setpoint, 120, 150);
+	double min_position, max_position, setpoint, percentage = 0.6;
+	initialize_setup(position_channel, rcServo0, min_position, max_position);
+	
+	setpoint = min_position + percentage*(max_position - min_position);
+	PID pid(5000, 1000, 300, setpoint, 120, 150, 0.256);
 
-	std::cout << "Place boat in wanted starting position.\n";
+	std::cout << "Minimum position: " << min_position << "\nMaximum position: " << max_position << "\nSetpoint: " << setpoint << "\n";
 	system("pause");
+
 
 
 	// Initialize necessary variables
 	double current_position, output;
 
 	int counter = 0;
-	int max_iterations = 200;
+	int max_iterations = 4000;
+	pid.i_term = 80;
 	do {
 
-		// Get current position
 		PhidgetVoltageRatioInput_getVoltageRatio(position_channel, &current_position);
-		std::cout << "Current position: " << current_position;
+		std::cout << "Current position: " << std::fixed << std::setprecision(4) << current_position << " | ";
 
+		output = pid.calculate_output(current_position);
+		std::cout << std::fixed << std::setprecision(0) << "Thrust output: " << output << " | ";
 
-		// Calculate thrust based on current error
-		output = pid.calculate_output(current_position); // scaling??????????????
-		std::cout << " Thrust output:    " << output << '\n';
+		pid.print_relevant_values();
 
-
-		// Apply calculated thrust
 		PhidgetRCServo_setTargetPosition(rcServo0, output);
 		PhidgetRCServo_setEngaged(rcServo0, 1);
 
-		Sleep(100); // Finn ut av timestep etc
+		//Sleep(100);
 
 		counter += 1;
 

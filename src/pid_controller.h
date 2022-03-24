@@ -4,15 +4,20 @@
 #include <stdio.h>
 #include <time.h>
 #include <iostream>
+#include <iomanip>
 #include <Windows.h>
 
 class PID {
 
 	public:
 
-		PID(double Kp, double Ki, double Kd, double setPoint, double minOutput, double maxOutput);
+		PID(double Kp, double Ki, double Kd, double setPoint, double minOutput, double maxOutput, double dtMax);
 		double calculate_output(double current_position);
 		void clear_variables();
+		void reset_variables();
+		void print_relevant_values();
+
+		double i_term;
 
 	private:
 
@@ -26,12 +31,12 @@ class PID {
 		double max_output;
 
 		double p_term;
-		double i_term;
 		double d_term;
 
-		clock_t current_time;
 		clock_t previous_time;
+		clock_t current_time;
 		double dt;
+		double dt_max;
 		
 		double current_error;
 		double previous_error;
