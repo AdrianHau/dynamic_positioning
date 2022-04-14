@@ -1,23 +1,30 @@
 #pragma once
 
-#include <phidget22.h>
-#include <stdio.h>
-#include <time.h>
-#include <iostream>
 #include <iomanip>
-#include <Windows.h>
+
+#include <phidget22.h>
+
 
 class PID {
+	/* 
+	*	Generalized PID class implementation. Only requires
+	*	a setpoint and the position relative to the setpoint
+	*	given as a float/double.
+	* 
+	* 
+	*	GENERALIZED PID - Not dependent on "external factors",
+	*	purely dependent on setpoint and current_position.
+	*/
 
 	public:
 
 		PID(double Kp, double Ki, double Kd, double setPoint, double minOutput, double maxOutput, double dtMax);
-		double calculate_output(double current_position);
 		void clear_variables();
-		void reset_variables();
-		void print_relevant_values();
+		double calculate_output(double current_position);
+		void change_setpoint(double setPoint);
+		void set_initial_i_term_value(double i_term_value);
+		double get_i_term() const;
 
-		double i_term;
 
 	private:
 
@@ -31,6 +38,7 @@ class PID {
 		double max_output;
 
 		double p_term;
+		double i_term;
 		double d_term;
 
 		clock_t previous_time;
