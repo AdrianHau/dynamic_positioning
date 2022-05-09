@@ -40,9 +40,6 @@ void PID::clear_variables() {
 }
 
 double PID::calculate_output(double current_position) {
-	/* SKRIV FORKLARING
-	*  trapesmetoden
-	*/	
 
 	current_time = clock();
 	dt = double(current_time - previous_time) / CLOCKS_PER_SEC;
@@ -52,9 +49,11 @@ double PID::calculate_output(double current_position) {
 	de = current_error - previous_error;
 	previous_error = current_error;
 
-	/*	Return 0 and consequentially move on to next iteration if dt is abnormally large.
-	*	Usually happens on first iteration as previous_time is initialized to 0, which
-	*	makes  dt = (current_time - previous_time)  large. Will look for a better fix if possible. */
+	/*	
+	* Return 0 and consequentially move on to next iteration if dt is abnormally large.
+	* Usually happens on first iteration as previous_time is initialized to 0, which
+	* makes  dt = (current_time - previous_time)  large. Will look for a better fix later.
+	*/
 	if (dt > dt_max) { return 0; }
 	
 	p_term = kp * current_error;
@@ -71,23 +70,18 @@ double PID::calculate_output(double current_position) {
 }
 
 void PID::change_setpoint(double setPoint) {
-	/// Changes setpoint to given value during runtime.
 
 	setpoint = setPoint;
 
 }
 
-void PID::set_initial_i_term_value(double i_term_value) {
-	/*	Sets integral term to wanted starting value.Useful
-	*	when...
-	*/	
+void PID::set_i_term_value(double i_term_value) {
 
 	i_term = i_term_value;
 
 }
 
 double PID::get_i_term() const {
-	/// Returns integral term for plotting & runtime analysis.
 
 	return i_term;
 

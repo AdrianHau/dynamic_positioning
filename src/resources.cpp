@@ -4,33 +4,36 @@
 
 
 Timer::Timer() {
-	/*
-	*	Sets start time of the timer upon initialization
-	*	of the timer instance.
-	*/
 
 	start_time = clock();
 
 }
 
 double Timer::get_elapsed_time() {
-	/* 
-	*	Calculates time elapsed, in unit seconds, since initialization
-	*	of timer instance.
-	*/
 
 	return double(clock() - start_time) / CLOCKS_PER_SEC;
-
 
 }
 
 void initialize_setup(PhidgetVoltageRatioInputHandle position_channel, 
 	PhidgetRCServoHandle rcServo, double &min_position, double &max_position) {
-	/*
+	/**
+	* RC Boat setup
+	* 
+	* Description:
 	*	Stores minimum and maximum voltage ratio values at the two ends
 	*	of the water tank so that the setpoint can be chosen as a
 	*	percentage of the water tank distance, i.e. 0 being at one end
 	*	and 1 at the other.
+	* 
+	* Parameters:
+	*	position_channel:	PhidgetInterfaceKit 8/8/8 voltage ratio input handle
+	*	rsServo:			PhidgetServo 1-Motor thrust output handle
+	*	min_position:		Minimum voltage ratio value of the tank 
+	*	max_position:		Maximum voltage ratio value of the tank
+	* 
+	* Returns:
+	*	No return value
 	*/
 
 	// Get minimum voltage ratio position and move to maximum position
@@ -56,18 +59,33 @@ void initialize_setup(PhidgetVoltageRatioInputHandle position_channel,
 
 
 void write_to_results_file(double time, double position, double setpoint) {
-	/// Writes results at a given time step to txt file.
+	/**
+	* Writes relevant information at a given time step to txt file
+	* for analyzation and visualization.
+	* 
+	* Parameters:
+	*	time:		Time elapsed since start of the run
+	*	position:	Current position of the vessel
+	*	setpoint:	Reference point to aim for
+	*				(can be altered during runtime)
+	* 
+	* Returns:
+	*	No return value
+	*/
 
-	FILE* results_file = fopen("dp_results.txt", "a");
+	FILE *results_file = fopen("dp_results.txt", "a");
 	fprintf(results_file, "%lf %lf %lf\n", time, position, setpoint);
 	fclose(results_file);
 
 }
 
 void write_to_vtf_file() {
-	/*	
-	*	Reads dp_results.txt file and translates the logged position
-	*	into vtf file to create animation in GLview Inova.
+	/**
+	* Reads relevant information from the generated txt file and translates
+	* the logged position into vtf file to create animation in GLview Inova.
+	* 
+	* Returns:
+	*	No return value
 	*/
 
 	FILE* vtf_file = fopen("dp_results.vtf", "w");
@@ -148,31 +166,34 @@ void write_to_vtf_file() {
 }
 
 
-double voltage_ratio_to_percentage(double current_voltage, double min_voltage, double max_voltage) {
-	/*	
-	*	Transforms voltage ratio value, i.e. the position of the boat, to a percentage value
-	*	based on minimum and maximum voltage ratio values of the setup.
+double voltage_ratio_to_percentage(double voltage_ratio, double min_voltage_ratio, double max_voltage_ratio) {
+	/**
+	* Transforms voltage ratio value, i.e. the position of the boat, to a percentage value
+	* based on minimum and maximum voltage ratio values of the setup.
 	*/
 
-	return ((current_voltage - min_voltage) / (max_voltage - min_voltage));
+	return ((voltage_ratio - min_voltage_ratio) / (max_voltage_ratio - min_voltage_ratio));
 
 }
 
-double percentage_to_setpoint(double percentage, double min_voltage, double max_voltage) {
-	/*	
-	*	Calculates setpoint in unit voltage ratio as a given percentage of the
-	*	distance between minimum and maximum voltage ratio values of the setup.
+double percentage_to_voltage_ratio(double percentage, double min_voltage_ratio, double max_voltage_ratio) {
+	/**
+	* Calculates setpoint in unit voltage ratio based on given percentage of the
+	* distance between minimum and maximum voltage ratio values of the setup.
 	*/
 
-	return (min_voltage + percentage * (max_voltage - min_voltage));
+	return (min_voltage_ratio + percentage * (max_voltage_ratio - min_voltage_ratio));
 
 }
 
 void print_relevant_values(double elapsed_time, double position, double setpoint, double thrust, double i_term) {
-	///	Prints relevant runtime values to the console.
+	/**
+	* Prints relevant runtime values to the console.
+	* Mainly for debugging.
+	*/
 
 	std::cout << std::fixed << std::setprecision(3) << "t = " << elapsed_time << " [s] | ";
-	std::cout << std::fixed << std::setprecision(1) << "position = " << position << " [-] | ";
+	std::cout << std::fixed << std::setprecision(3) << "position = " << position << " [-] | ";
 	std::cout << std::fixed << std::setprecision(2) << "setpoint = " << setpoint << " [-] | ";
 	std::cout << std::fixed << std::setprecision(1) << "thrust =  " << thrust << " [-] | ";
 	std::cout << std::fixed << std::setprecision(1) << "i_term = " << i_term << " [-] \n";
