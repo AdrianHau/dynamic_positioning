@@ -109,7 +109,7 @@ class PID {
 
 /**
 * Potential future additions:
-*	- Ability to alter Kp, Ki, Kd during runtime.
+*	- Ability to alter Kp, Ki, Kd during runtime?
 *	- More get_variable() or get_constant() functions
 *	  similar to the get_i_term() function. 
 *	- Integral windup guard

@@ -9,7 +9,7 @@
 void run_pid_controller(PID &pid, bool &is_finished, PhidgetVoltageRatioInputHandle &position_channel, PhidgetRCServoHandle &rcServo0,
 	double min_position, double max_position, double &setpoint_in_percentage) {
 	/**
-	*	Main loop. Threaded to allow for altering the setpoint in real time.
+	*	Main loop. Threaded with user input management loop to allow for altering the setpoint in real time.
 	*/
 
 	// Initialize necessary variables. Timer starts on initialization.
@@ -18,19 +18,20 @@ void run_pid_controller(PID &pid, bool &is_finished, PhidgetVoltageRatioInputHan
 
 	/*
 	* Set the integral term to a user determined value to prevent
-	* having to wait for the term to build up.
+	* having to wait for the term to build up at the start of the run.
 	*/
 	pid.set_i_term_value(85);
 
 	do {
-
+		
+		// Calculate and apply output based on current position
 		PhidgetVoltageRatioInput_getVoltageRatio(position_channel, &current_position);
 		output = pid.calculate_output(current_position);
 		PhidgetRCServo_setTargetPosition(rcServo0, output);
 		PhidgetRCServo_setEngaged(rcServo0, 1);
 
+		// Get elapsed time and position in percentage for runtime printing and post-run plotting purposes
 		elapsed_time = timer.get_elapsed_time();
-		
 		position_in_percentage = voltage_ratio_to_percentage(current_position, min_position, max_position);
 		print_relevant_values(elapsed_time, position_in_percentage, setpoint_in_percentage, output, pid.get_i_term());
 		write_to_results_file(elapsed_time, position_in_percentage, setpoint_in_percentage);
@@ -41,15 +42,10 @@ void run_pid_controller(PID &pid, bool &is_finished, PhidgetVoltageRatioInputHan
 void user_input_management(PID &pid, bool &is_finished, double &setpoint_in_percentage, double min_position, double max_position, double &setpoint) {
 	/**
 	* User input management function
-	* 
-	* Description:
-	*	Takes in user input to either terminate the current run, or alter the setpoint of the current run.
-	*	Press 1 in the terminal during runtime to terminate run, or 2 to alter the setpoint.
-	*	Can potentially be expanded in the future to allow for more functionalities, such as altering
-	*	the PID constants during runtime for example.
-	* 
-	* Parameters:
-	*	
+	* Takes in user input to either terminate the current run, or alter the setpoint of the current run.
+	* Press 1 in the terminal during runtime to terminate run, or 2 to alter the setpoint.
+	* Can potentially be expanded in the future to allow for more functionalities, such as altering
+	* the PID constants during runtime for example.
 	*/
 
 	int choice;
@@ -108,6 +104,8 @@ int main() {
 	std::thread main_loop(run_pid_controller, std::ref(pid), std::ref(is_finished), std::ref(position_channel), std::ref(rcServo0), min_position, max_position, std::ref(setpoint_in_percentage));
 	std::thread user_management(user_input_management, std::ref(pid), std::ref(is_finished), std::ref(setpoint_in_percentage), min_position, max_position, std::ref(setpoint));
 	
+
+	// Join loops when the is_finished boolean is set to true in the user management thread
 	user_management.join();
 	main_loop.join();
 

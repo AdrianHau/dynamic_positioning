@@ -5,8 +5,8 @@
 
 #include <phidget22.h>
 
-/*	Timer to keep track of time during runtime.
-*
+/**	
+*	Timer to keep track of time during runtime.
 *	Implemented as a class so that potential additional functionality
 *	can be added in the future if wanted. Timer starts ticking upon
 *	initialization of the timer instance.
